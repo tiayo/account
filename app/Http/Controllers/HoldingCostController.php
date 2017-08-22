@@ -45,9 +45,7 @@ class HoldingCostController extends Controller
             ->orderBy('count', 'desc')
             ->get();
 
-        return response()->json($symbols, 200, [
-            'Access-Control-Allow-Origin' => '*',
-        ]);
+        return response()->json($symbols);
     }
 
     /**
@@ -67,9 +65,7 @@ class HoldingCostController extends Controller
         $values[4] = $this->get($symbol, 1, 1);
         $values[5] = $this->get($symbol, 1, 2);
 
-        return response()->json($values, 200, [
-            'Access-Control-Allow-Origin' => '*',
-        ]);
+        return response()->json($values);
     }
 
     /**
@@ -87,6 +83,7 @@ class HoldingCostController extends Controller
             ->where('SYMBOL', $symbol)
             ->where('CMD', $cmd)
             ->where('TYPE', $type)
+            ->limit(100)
             ->get()
             ->toArray();
     }
