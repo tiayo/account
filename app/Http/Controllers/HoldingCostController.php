@@ -28,7 +28,7 @@ class HoldingCostController extends Controller
         $type[5] = '空投止盈位分布图';
 
         return view('holding_cost', [
-
+            'type' => $type,
         ]);
     }
 

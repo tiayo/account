@@ -24,7 +24,8 @@
                 @for($i=0; $i <= 5; $i++)
                     <div class="col-sm-6" id="holding_cost_{{ $i }}">
                         <div class="panel">
-                            <header class="panel-heading" style="height: 51px;">
+                            <header class="panel-heading">
+                                {{ $type[$i] }}
                                 <span class="tools pull-right">
                                     <a href="javascript:;" class="fa fa-chevron-down"></a>
                                     <a href="javascript:;" class="fa fa-times"></a>
