@@ -33,7 +33,7 @@
                             </header>
                             <div class="panel-body">
                                 <div class="chartJS">
-                                    <canvas id="bar-ECharts-js{{ $i }}" height="500" width="700" ></canvas>
+                                    <canvas id="bar-ECharts-js{{ $i }}" height="1500" width="700" ></canvas>
                                 </div>
 
                             </div>
