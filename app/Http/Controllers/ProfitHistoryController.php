@@ -27,7 +27,7 @@ class ProfitHistoryController extends Controller
             ->select('PROFTI_SUM')
             ->where('LOGIN', $login)
             ->orderBy('PROFIT_DATE', 'desc')
-            ->limit(1000)
+            ->limit(100)
             ->get()
             ->toArray();
 
