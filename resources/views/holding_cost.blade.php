@@ -33,7 +33,7 @@
                             </header>
                             <div class="panel-body">
                                 <div class="chartJS">
-                                    <canvas id="bar-ECharts-js{{ $i }}" height="1500" width="700" ></canvas>
+                                    <canvas id="bar-ECharts-js{{ $i }}" height="400" width="700" ></canvas>
                                 </div>
 
                             </div>
@@ -93,7 +93,8 @@ genenal = {
     }],
     yAxis: [{
         nameTextStyle:[{
-            fontSize : 100
+            lineHeight : 2,
+            backgroundColor:'#123234',
         }],
         type: 'category',
         data: [],
@@ -109,8 +110,7 @@ genenal = {
         type: 'bar',
         stack: 'chart',
         barWidth:1,
-        barGap:0,
-        itemHeight:2,
+        barCategoryGap:'1%',
         z: 3,
         label: {
             normal: {

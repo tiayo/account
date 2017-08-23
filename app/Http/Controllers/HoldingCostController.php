@@ -83,7 +83,6 @@ class HoldingCostController extends Controller
             ->where('SYMBOL', $symbol)
             ->where('CMD', $cmd)
             ->where('TYPE', $type)
-            ->limit(100)
             ->get()
             ->toArray();
     }
