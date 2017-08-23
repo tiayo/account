@@ -1,7 +1,9 @@
 ﻿<meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" href="/dataStatistics/style/style.css" media="screen" type="text/css" />
 
+
 <div class="dataStatistics">
+    <span style="float: left;">$</span>
     <div class="digit_set"></div>
     <div class="digit_set"></div>
     <div class="digit_set"></div>
