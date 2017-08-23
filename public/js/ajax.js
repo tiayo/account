@@ -163,38 +163,69 @@ function holdingsymbol_ajax(num, route) {
  * @param grouping
  */
 function holding_cost_chart_ajax(route){
+
     $.ajax({
         url: route,
         type: 'GET',
         dataType:'json',
         success:function(result){
             $.each(result,function(k, v){
+
+                var count = v.length;
+
                 //数组不为空
-                if (v.length != 0) {
+                if (count != 0) {
 
                     var char_name = echarts.init(document.getElementById('bar-ECharts-js' + k));
-
                     var max = 1;
-                    var count = v.length;
+                    var x = [];
+                    var y = [];
                     var num = parseInt(count/4);
 
-                    $.each(v, function (a, b) {
-                        y1.push(parseFloat(b.VOLUME).toFixed(2));
+                    y = [];
 
-                        if (max%num == 0 || max == count || max == 1) {
-                            y11.push(parseFloat(b.PRICE).toFixed(2));
+                    x = [];
+
+                    $.each(v, function (a, b) {
+
+                        x.push(parseFloat(b.VOLUME).toFixed(2));
+
+                        if (max%num == 0 || max == 1) {
+                            console.log(a+":" + b.PRICE);
+                            y.push(parseFloat(b.PRICE).toFixed(2));
                         } else {
-                            y11.push('');
+                            y.push('');
                         }
 
                         max++;
                     });
 
-                    genenal.xAxis = [{
-                        type: 'value',
+                    genenal.yAxis = [{
+                        type: 'category',
+                        data: y,
+                        splitNumber: 5,
+                        axisLabel: {
+                            interval: 0,
+                            rotate: 30
+                        },
                         splitLine: {
-                            show: true
+                            show: false
                         }
+                    }];
+
+                    genenal.series = [{
+                        type: 'bar',
+                        stack: 'chart',
+                        barWidth:1,
+                        barCategoryGap:'1%',
+                        z: 3,
+                        label: {
+                            normal: {
+                                position: 'right',
+                                show: false
+                            }
+                        },
+                        data: x
                     }];
 
                     char_name.setOption(genenal);

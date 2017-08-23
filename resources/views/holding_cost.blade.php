@@ -61,9 +61,6 @@ ctx.translate(50, 50);
 ctx.rotate(-Math.PI / 4);
 ctx.fillText(waterMarkText, 0, 0);
 
-var y1 = [];
-var y11 = [];
-
 genenal = {
     backgroundColor: {
         type: 'pattern',
@@ -93,7 +90,7 @@ genenal = {
     }],
     yAxis: [{
         type: 'category',
-        data: y11,
+        data: [],
         splitNumber: 5,
         axisLabel: {
             interval: 0,
@@ -115,7 +112,7 @@ genenal = {
                 show: false
             }
         },
-        data: y1
+        data: []
     }]
 };
 
