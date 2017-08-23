@@ -73,7 +73,6 @@ class HoldingSymbolController extends Controller
             ->select('SYMBOL', DB::raw('count(1) as count'))
             ->groupBy('SYMBOL')
             ->orderBy('count', 'desc')
-            ->limit($limit)
             ->get();
     }
 
