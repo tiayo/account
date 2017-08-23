@@ -61,7 +61,6 @@ ctx.translate(50, 50);
 ctx.rotate(-Math.PI / 4);
 ctx.fillText(waterMarkText, 0, 0);
 
-var yy11 = [];
 var y1 = [];
 
 genenal = {

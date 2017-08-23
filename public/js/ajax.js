@@ -176,17 +176,11 @@ function holding_cost_chart_ajax(route){
 
                     var max = 0;
                     $.each(v, function (a, b) {
-
-                        yy11.push(parseFloat(b.PRICE).toFixed(4));
-
                         y1.push(parseFloat(b.VOLUME).toFixed(2));
-
-                        max = b.VOLUME > max ? b.VOLUME : max;
                     });
 
                     genenal.xAxis = [{
                         type: 'value',
-                        max: (parseInt(max) + 1),
                         splitLine: {
                             show: true
                         }
