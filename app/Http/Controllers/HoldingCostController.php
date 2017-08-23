@@ -59,10 +59,10 @@ class HoldingCostController extends Controller
     public function getValue($symbol)
     {
         $values[0] = $this->get($symbol, 0, 0);
-        $values[1] = $this->get($symbol, 0, 1);
-        $values[2] = $this->get($symbol, 0, 2);
-        $values[3] = $this->get($symbol, 1, 0);
-        $values[4] = $this->get($symbol, 1, 1);
+        $values[1] = $this->get($symbol, 1, 0);
+        $values[2] = $this->get($symbol, 0, 1);
+        $values[3] = $this->get($symbol, 1, 1);
+        $values[4] = $this->get($symbol, 0, 2);
         $values[5] = $this->get($symbol, 1, 2);
 
         return response()->json($values);
