@@ -89,7 +89,7 @@
 
     <!--footer section start-->
     <footer>
-        2014 &copy; AdminEx by <a href="http://www.tcode.me/" target="_blank">淘代码</a>
+        Copyright © 2015 - 2017 startce. All Rights Reserved
     </footer>
     <!--footer section end-->
 

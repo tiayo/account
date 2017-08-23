@@ -11,7 +11,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>用户</th>
+                    <th>mt4账号</th>
                     <th>订单号</th>
                     <th>品种</th>
                     <th>手数</th>
