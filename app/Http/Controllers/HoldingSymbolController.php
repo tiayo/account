@@ -70,9 +70,9 @@ class HoldingSymbolController extends Controller
     public function getSymbol($limit = 500)
     {
         return $this->symbol
-            ->select('SYMBOL', DB::raw('count(1) as count'))
+            ->select('SYMBOL')
             ->groupBy('SYMBOL')
-            ->orderBy('count', 'desc')
+            ->orderBy('VOLUME', 'desc')
             ->get();
     }
 
