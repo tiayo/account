@@ -18,7 +18,7 @@ class HoldingSymbolController extends Controller
 
     public function view()
     {
-        $symbols = $this->getSymbol($this->count);
+        $symbols = $this->getSymbol();
 
         $result = [];$i = 1;
 
@@ -67,7 +67,7 @@ class HoldingSymbolController extends Controller
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getSymbol($limit = 500)
+    public function getSymbol()
     {
         return $this->symbol
             ->select('SYMBOL')
