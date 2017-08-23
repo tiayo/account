@@ -182,16 +182,11 @@ function holding_cost_chart_ajax(route){
                     var y = [];
                     var num = parseInt(count/4);
 
-                    y = [];
-
-                    x = [];
-
                     $.each(v, function (a, b) {
 
                         x.push(parseFloat(b.VOLUME).toFixed(2));
 
                         if (max%num == 0 || max == 1) {
-                            console.log(a+":" + b.PRICE);
                             y.push(parseFloat(b.PRICE).toFixed(2));
                         } else {
                             y.push('');

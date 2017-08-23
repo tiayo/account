@@ -47,7 +47,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
-            url: "{{ route('profit_history', ['login' => 88020633]) }}",
+            url: "{{ route('profit_history', ['login' => Request::route('login')]) }}",
             dataType: "json",
             success: function (result) {
                 i = 0;
