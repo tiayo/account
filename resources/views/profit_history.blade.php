@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <h4>高手:{{ $login }}</h4>
+                        <h4>mt4账号:{{ $login }}</h4>
                     </div>
                     <div class="panel">
                         <div class="panel-body">
