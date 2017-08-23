@@ -36,7 +36,7 @@ class ProfitHistoryController extends Controller
         
         foreach ($info as $value) {
             $result[$i]['name'] = $i;
-            $result[$i]['value'][] = Carbon::parse($value['PROFIT_DATE'])->format('YmdHis');
+            $result[$i]['value'][] = Carbon::parse($value['PROFIT_DATE'])->format('Ymd H:i:s');
             $result[$i]['value'][] = number_format($value['PROFTI_SUM'], 0);
             $i++;
         }
