@@ -203,6 +203,9 @@ function holding_cost_chart_ajax(route){
                             interval: 0,
                             rotate: 30
                         },
+                        axisTick:{
+                            show: false
+                        },
                         splitLine: {
                             show: false
                         }
