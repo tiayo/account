@@ -188,7 +188,7 @@ function holding_cost_chart_ajax(route){
                         type: 'value',
                         max: (parseInt(max) + 1),
                         splitLine: {
-                            show: false
+                            show: true
                         }
                     }];
 

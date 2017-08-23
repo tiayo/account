@@ -92,10 +92,6 @@ genenal = {
         }
     }],
     yAxis: [{
-        nameTextStyle:[{
-            lineHeight : 2,
-            backgroundColor:'#123234',
-        }],
         type: 'category',
         data: [],
         axisLabel: {
@@ -103,7 +99,7 @@ genenal = {
             rotate: 30
         },
         splitLine: {
-            show: false
+            show: true
         }
     }],
     series: [{
