@@ -174,9 +174,20 @@ function holding_cost_chart_ajax(route){
 
                     var char_name = echarts.init(document.getElementById('bar-ECharts-js' + k));
 
-                    var max = 0;
+                    var max = 1;
+                    var count = v.length;
+                    var num = parseInt(count/4);
+
                     $.each(v, function (a, b) {
                         y1.push(parseFloat(b.VOLUME).toFixed(2));
+
+                        if (max%num == 0 || max == count || max == 1) {
+                            y11.push(parseFloat(b.PRICE).toFixed(2));
+                        } else {
+                            y11.push('');
+                        }
+
+                        max++;
                     });
 
                     genenal.xAxis = [{

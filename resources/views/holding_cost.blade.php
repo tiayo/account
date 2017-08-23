@@ -62,6 +62,7 @@ ctx.rotate(-Math.PI / 4);
 ctx.fillText(waterMarkText, 0, 0);
 
 var y1 = [];
+var y11 = [];
 
 genenal = {
     backgroundColor: {
@@ -92,13 +93,14 @@ genenal = {
     }],
     yAxis: [{
         type: 'category',
-        data: [],
+        data: y11,
+        splitNumber: 5,
         axisLabel: {
             interval: 0,
             rotate: 30
         },
         splitLine: {
-            show: true
+            show: false
         }
     }],
     series: [{

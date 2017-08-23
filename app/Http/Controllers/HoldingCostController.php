@@ -20,12 +20,12 @@ class HoldingCostController extends Controller
 
     public function view()
     {
-        $type[0] = '多投持仓成本分布图';
-        $type[1] = '空投持仓成本分布图';
-        $type[2] = '多投止损位分布图';
-        $type[3] = '空投止损位分布图';
-        $type[4] = '多投止盈位分布图';
-        $type[5] = '空投止盈位分布图';
+        $type[0] = '多头持仓成本分布图';
+        $type[1] = '空头持仓成本分布图';
+        $type[2] = '多头止损位分布图';
+        $type[3] = '空头止损位分布图';
+        $type[4] = '多头止盈位分布图';
+        $type[5] = '空头止盈位分布图';
 
         return view('holding_cost', [
             'type' => $type,
