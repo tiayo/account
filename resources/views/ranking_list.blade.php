@@ -73,7 +73,7 @@
                                             <td>{{ $follow['PROFIT_SUM'] }}</td>
                                             <td>{{ $follow['TRADE_CNT'] }}</td>
                                             <td>
-                                                <button class="btn btn-info" onclick="location='{{ route('profit_history', ['login' => $follow['LOGIN']]) }}'" type="button">查看历史盈亏</button>
+                                                <button class="btn btn-info" onclick="location='{{ route('profit_history', ['login' => $follow['LOGIN'], 'type' => (($key == 'info') ? 1 : 2) ]) }}'" type="button">查看历史盈亏</button>
                                             </td>
                                         </tr>
                                     @endforeach

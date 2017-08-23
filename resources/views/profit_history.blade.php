@@ -39,8 +39,7 @@
     <script>
 
         data = [];
-        var y = [];
-        var x = [];
+        var y = [],x = [];
 
         $.ajax({
             type: "post",
@@ -50,14 +49,17 @@
             url: "{{ route('profit_history', ['login' => Request::route('login')]) }}",
             dataType: "json",
             success: function (result) {
+
                 i = 0;
-                $.each(result, function (key, item) {
+                y = result['y'];
+                console.log(y);
+
+                $.each(result['info'], function (key, item) {
                     data.push(item);
-                    y[i] = item['value'][1];
                     x[i] = item['value'][0];
                     i++;
                 });
-                console.log(x);
+
                 chart();
             }
         });

@@ -45,7 +45,7 @@ class RankingListController extends Controller
     {
         $info = $this->follow
             ->orderBy('PROFIT_AVG', 'desc')
-            ->where('PROFIT_SUM', '>=', 100000)
+            ->where('PROFIT_SUM', '>=', 10000)
             ->limit(10)
             ->get()
             ->toArray();

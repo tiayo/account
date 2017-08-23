@@ -23,25 +23,36 @@ class ProfitHistoryController extends Controller
 
     public function get($login)
     {
+        $i = 0; $result = []; $y=[];
+
         $info = $this->profit_history
             ->select('PROFTI_SUM', 'PROFIT_DATE')
             ->where('LOGIN', $login)
-            ->orderBy('PROFIT_DATE', 'desc')
+            ->orderBy('PROFIT_DATE', 'asc')
             ->get()
             ->toArray();
 
-        $info = array_reverse($info);
+        $sum = $this->profit_history
+            ->select('PROFTI_SUM')
+            ->where('LOGIN', $login)
+            ->orderBy('PROFTI_SUM', 'asc')
+            ->get()
+            ->toArray();
 
-        $i = 0; $result = [];
-        
+        foreach ($sum as $item) {
+            $y[] = number_format($item['PROFTI_SUM'], 0);
+        }
+
+//        $info = array_reverse($info);
+
         foreach ($info as $value) {
             $result[$i]['name'] = $i;
-            $result[$i]['value'][] = Carbon::parse($value['PROFIT_DATE'])->format('Ymd');
+            $result[$i]['value'][] = Carbon::parse($value['PROFIT_DATE'])->format('Y-m-d H:i:s');
             $result[$i]['value'][] = number_format($value['PROFTI_SUM'], 0);
             $i++;
         }
 
-        return response()->json($result);
+        return response()->json(['y' => $y, 'info' => $result]);
     }
 
 }
