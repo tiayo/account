@@ -27,7 +27,6 @@ class ProfitHistoryController extends Controller
             ->select('PROFTI_SUM', 'PROFIT_DATE')
             ->where('LOGIN', $login)
             ->orderBy('PROFIT_DATE', 'desc')
-            ->limit(100)
             ->get()
             ->toArray();
 
@@ -42,9 +41,7 @@ class ProfitHistoryController extends Controller
             $i++;
         }
 
-        return response()->json($result, 200, [
-            'Access-Control-Allow-Origin' => '*'
-        ]);
+        return response()->json($result);
     }
 
 }
