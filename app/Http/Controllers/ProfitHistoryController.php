@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ProfitHistory;
+use Carbon\Carbon;
 
 class ProfitHistoryController extends Controller
 {
@@ -16,7 +17,6 @@ class ProfitHistoryController extends Controller
     public function view($login)
     {
         return view('profit_history', [
-            'data' => json_encode($this->get($login)),
             'login' => $login,
         ]);
     }
@@ -24,7 +24,7 @@ class ProfitHistoryController extends Controller
     public function get($login)
     {
         $info = $this->profit_history
-            ->select('PROFTI_SUM')
+            ->select('PROFTI_SUM', 'PROFIT_DATE')
             ->where('LOGIN', $login)
             ->orderBy('PROFIT_DATE', 'desc')
             ->limit(100)
@@ -36,12 +36,15 @@ class ProfitHistoryController extends Controller
         $i = 0; $result = [];
         
         foreach ($info as $value) {
-            $result[$i][] = $i;
-            $result[$i][] = $value['PROFTI_SUM'];
+            $result[$i]['name'] = $i;
+            $result[$i]['value'][] = Carbon::parse($value['PROFIT_DATE'])->format('YmdHis');
+            $result[$i]['value'][] = number_format($value['PROFTI_SUM'], 0);
             $i++;
         }
 
-        return $result;
+        return response()->json($result, 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
     }
 
 }

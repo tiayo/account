@@ -92,6 +92,9 @@ genenal = {
         }
     }],
     yAxis: [{
+        nameTextStyle:[{
+            fontSize : 100
+        }],
         type: 'category',
         data: yy11,
         axisLabel: {

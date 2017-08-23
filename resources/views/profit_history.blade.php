@@ -20,7 +20,7 @@
                                     </div>
 
                                     <div id="main-chart">
-                                        <div id="main-chart-container" class="main-chart" style="height: 650px;">
+                                        <div id="main_chart_container" class="main-chart" style="height: 650px;">
                                         </div>
                                     </div>
                                 </div>
@@ -34,68 +34,99 @@
 @endsection
 
 @section('script')
-    <!-- jQuery Flot Chart-->
-    <script src="{{ asset('/static/adminex/js/flot-chart/jquery.flot.js') }}"></script>
-    <script src="{{ asset('/static/adminex/js/flot-chart/jquery.flot.tooltip.js') }}"></script>
-    <script src="{{ asset('/static/adminex/js/flot-chart/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('/js/echarts.js') }}"> </script>
+    <script src="{{ asset('/js/ajax.js') }}"> </script>
     <script>
-        $(function() {
 
-            var d1 = {!! $data !!};
+        data = [];
+        var y = [];
+        var x = [];
 
-            var data = ([{
-                label: "收益率",
-                data: d1,
-                lines: {
-                    show: true,
-                    fill: true,
-                    fillColor: {
-                        colors: ["rgba(255,255,255,.4)", "rgba(183,236,240,.4)"]
-                    }
-                }
+        $.ajax({
+            type: "post",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
-            ]);
-
-            var options = {
-                grid: {
-                    backgroundColor:
-                        {
-                            colors: ["#ffffff", "#f4f4f6"]
-                        },
-                    hoverable: true,
-                    clickable: true,
-                    tickColor: "#eeeeee",
-                    borderWidth: 1,
-                    borderColor: "#eeeeee"
-                },
-                // Tooltip
-                tooltip: true,
-                tooltipOpts: {
-                    content: "%s X: %x Y: %y",
-                    shifts: {
-                        x: -60,
-                        y: 25
-                    },
-                    defaultTheme: false
-                },
-                legend: {
-                    labelBoxBorderColor: "#000000",
-                    container: $("#main-chart-legend"), //remove to show in the chart
-                    noColumns: 0
-                },
-                series: {
-                    stack: true,
-                    shadowSize: 0,
-                    highlightColor: 'rgba(000,000,000,.2)'
-                },
-                points: {
-                    show: true,
-                    radius: 1,
-                    symbol: "circle"
-                },
-                colors: ["#5abcdf", "#ff8673"]
-            };
-            var plot = $.plot($("#main-chart #main-chart-container"), data, options);
+            url: "{{ route('profit_history', ['login' => 88020633]) }}",
+            dataType: "json",
+            success: function (result) {
+                i = 0;
+                $.each(result, function (key, item) {
+                    data.push(item);
+                    y[i] = item['value'][1];
+                    x[i] = item['value'][0];
+                    i++;
+                });
+                console.log(x);
+                chart();
+            }
         });
+
+        function chart() {
+
+            var char_name = echarts.init(document.getElementById('main_chart_container'));
+
+            option = {
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        show: false,
+                        start: 0,
+                        end: 100,
+                        handleSize: 8
+                    },
+                    {
+                        type: 'inside',
+                        start: 0,
+                        end: 100
+                    },
+                    {
+                        type: 'slider',
+                        show: false,
+                        yAxisIndex: 0,
+                        filterMode: 'empty',
+                        width: 12,
+                        height: '70%',
+                        handleSize: 8,
+                        showDataShadow: false,
+                        left: '93%'
+                    }
+                ],
+                title: {
+
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: x,
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: y,
+                    boundaryGap: [0, '100%'],
+                    splitLine: {
+                        show: false
+                    }
+                },
+                series: [{
+                    name: '盈亏曲线',
+                    type: 'line',
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: data
+                }]
+            };
+
+            char_name.setOption(option);
+        }
+
     </script>
 @endsection

@@ -13,9 +13,7 @@ Route::get('/holdingcost_value/{symbol}', 'HoldingCostController@getValue')->nam
 Route::get('/holdingsymbol_view', 'HoldingSymbolController@view')->name('holdingsymbol_view');
 Route::post('/holdingsymbol_value/{symbol}', 'HoldingSymbolController@getValue')->name('holdingsymbol_value');
 
-Route::get('/profit_history/{login}', 'ProfitHistoryController@get')->name('profit_history');
-
 Route::get('/ranking_list', 'RankingListController@view')->name('ranking_list');
 
 Route::get('/profit_history/{login}', 'ProfitHistoryController@view')->name('profit_history');
-
+Route::post('/profit_history/{login}', 'ProfitHistoryController@get');
