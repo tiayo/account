@@ -71,8 +71,9 @@ class HoldingSymbolController extends Controller
     {
         return $this->symbol
             ->select('SYMBOL')
+            ->where('SYMBOL', 'not like', '%bo')
             ->groupBy('SYMBOL')
-            ->orderBy('VOLUME', 'desc')
+            ->orderBy(DB::raw("sum(volume)"), 'desc')
             ->get();
     }
 
