@@ -85,6 +85,32 @@ genenal = {
         splitLine: {
             show: false
         }
+    }],
+    yAxis: [{
+        type: 'category',
+        data: [],
+        splitNumber: 5,
+        axisLabel: {
+            interval: 0,
+            rotate: 30
+        },
+        splitLine: {
+            show: false
+        }
+    }],
+    series: [{
+        type: 'bar',
+        stack: 'chart',
+        barWidth:1,
+        barCategoryGap:'1%',
+        z: 3,
+        label: {
+            normal: {
+                position: 'right',
+                show: false
+            }
+        },
+        data: []
     }]
 };
 

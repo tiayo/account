@@ -22,8 +22,8 @@
                                 <tr>
                                     <th>mt4账号</th>
                                     <th>姓名</th>
-                                    <th>交易总数</th>
-                                    <th>胜率</th>
+                                    <th>交易次数</th>
+                                    <th>胜率(%)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -32,7 +32,7 @@
                                     <td>{{ $win_rate['LOGIN'] }}</td>
                                     <td>{{ $win_rate['NAME'] }}</td>
                                     <td>{{ $win_rate['TRADE_CNT'] }}</td>
-                                    <td>{{ $win_rate['WIN_RATE'] }}</td>
+                                    <td>{{ number_format($win_rate['WIN_RATE'], 2) }}</td>
                                 </tr>
                                 @endforeach
                                 </tbody>
@@ -58,9 +58,9 @@
                                     <tr>
                                         <th>mt4账号</th>
                                         <th>姓名</th>
-                                        <th>平均收益率</th>
-                                        <th>总收益率</th>
-                                        <th>交易量</th>
+                                        <th>每手盈亏($)</th>
+                                        <th>累计盈亏($)</th>
+                                        <th>交易次数</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
