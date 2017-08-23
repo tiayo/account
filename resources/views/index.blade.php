@@ -70,7 +70,7 @@
                                 <i class="fa fa-eye"></i>
                             </div>
                             <div class="state-value">
-                                <div class="value" id="user_equity"></div>
+                                <div class="value" id="user_trade_vol"></div>
                                 <div class="title">总交易量</div>
                             </div>
                         </div>

@@ -21,11 +21,11 @@ function dataStatistics_ajax(route, count) {
 
             if (count === 0) {
                 time = 500;
-                min = parseInt(data.TRADE_VOL) - 1000;
-                max = parseInt(data.TRADE_VOL);
+                min = parseInt(data.EQUITY) - 1000;
+                max = parseInt(data.EQUITY);
             } else {
                 time = 9000;
-                max = parseInt(data.TRADE_VOL);
+                max = parseInt(data.EQUITY);
             }
 
             // console.log(time);
@@ -42,7 +42,7 @@ function dataStatistics_ajax(route, count) {
                 $('.dataStatistics').dataStatistics({min:min,max:max,time:time,len:9});
             }
 
-            min = parseInt(data.TRADE_VOL);
+            min = parseInt(data.EQUITY);
 
             //计数器加1
             $('#dataStatistics_count').html(++count);
@@ -70,9 +70,9 @@ function index_user(route) {
             $('#user_cnt').html(data.USER_CNT);
             $('#user_margin').html('$ '+parseFloat(data.MARGIN).toFixed(2));
             $('#user_trade_cnt').html(data.TRADE_CNT);
-            $('#user_equity').html('$ '+parseFloat(data.EQUITY).toFixed(2));
+            // $('#user_equity').html('$ '+parseFloat(data.EQUITY).toFixed(2));
             $('#user_balance').html('$ '+parseFloat(data.BALANCE).toFixed(2));
-            // $('#user_trade_vol').html(data.TRADE_VOL);
+            $('#user_trade_vol').html(data.TRADE_VOL);
         }
     });
 }
