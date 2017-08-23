@@ -38,7 +38,7 @@
                                 <div class="value">
                                     <iframe id="iframe" src="{{ route('dataStatistics') }}" frameborder="0" width="100%" style="margin-top: -49px;margin-left: -72px;" scrolling="no"></iframe>
                                 </div>
-                                <div class="title" style="margin:0 0 28px 0">余额</div>
+                                <div class="title" style="margin:0 0 28px 0">净值</div>
                             </div>
                         </div>
                     </div>
@@ -59,8 +59,8 @@
                                 <i class="fa fa-eye"></i>
                             </div>
                             <div class="state-value">
-                                <div class="value" id="user_trade_vol"></div>
-                                <div class="title">净值</div>
+                                <div class="value" id="user_balance"></div>
+                                <div class="title">余额</div>
                             </div>
                         </div>
                     </div>

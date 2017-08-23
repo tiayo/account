@@ -21,11 +21,11 @@ function dataStatistics_ajax(route, count) {
 
             if (count === 0) {
                 time = 500;
-                min = parseInt(data.BALANCE) - 1000;
-                max = parseInt(data.BALANCE);
+                min = parseInt(data.TRADE_VOL) - 1000;
+                max = parseInt(data.TRADE_VOL);
             } else {
                 time = 9000;
-                max = parseInt(data.BALANCE);
+                max = parseInt(data.TRADE_VOL);
             }
 
             // console.log(time);
@@ -39,10 +39,10 @@ function dataStatistics_ajax(route, count) {
                 });
 
                 //添加数字
-                $('.dataStatistics').dataStatistics({min:min,max:max,time:time,len:10});
+                $('.dataStatistics').dataStatistics({min:min,max:max,time:time,len:9});
             }
 
-            min = parseInt(data.BALANCE);
+            min = parseInt(data.TRADE_VOL);
 
             //计数器加1
             $('#dataStatistics_count').html(++count);
@@ -71,7 +71,8 @@ function index_user(route) {
             $('#user_margin').html('$ '+parseFloat(data.MARGIN).toFixed(2));
             $('#user_trade_cnt').html(data.TRADE_CNT);
             $('#user_equity').html('$ '+parseFloat(data.EQUITY).toFixed(2));
-            $('#user_trade_vol').html(data.TRADE_VOL);
+            $('#user_balance').html('$ '+parseFloat(data.BALANCE).toFixed(2));
+            // $('#user_trade_vol').html(data.TRADE_VOL);
         }
     });
 }

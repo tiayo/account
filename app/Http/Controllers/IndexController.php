@@ -50,12 +50,12 @@ class IndexController extends Controller
 
         if ($type == 1) {
             $user = $this->user
-                ->select('BALANCE')
+                ->select('TRADE_VOL')
                 ->first()
                 ->toArray();
         } else if ($type == 2) {
             $user = $this->user
-                ->select('USER_CNT', 'MARGIN', 'EQUITY', 'TRADE_CNT', 'TRADE_VOL')
+                ->select('USER_CNT', 'MARGIN', 'BALANCE', 'EQUITY', 'TRADE_CNT', 'TRADE_VOL')
                 ->first()
                 ->toArray();
         }

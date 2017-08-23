@@ -96,7 +96,7 @@ genenal = {
             fontSize : 100
         }],
         type: 'category',
-        data: yy11,
+        data: [],
         axisLabel: {
             interval: 0,
             rotate: 30
@@ -108,11 +108,14 @@ genenal = {
     series: [{
         type: 'bar',
         stack: 'chart',
+        barWidth:1,
+        barGap:0,
+        itemHeight:2,
         z: 3,
         label: {
             normal: {
                 position: 'right',
-                show: true
+                show: false
             }
         },
         data: y1

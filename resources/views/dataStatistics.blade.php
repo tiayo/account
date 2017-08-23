@@ -10,7 +10,6 @@
     <div class="digit_set"></div>
     <div class="digit_set"></div>
     <div class="digit_set"></div>
-    <div class="digit_set"></div>
     <div class="digit_set set_last"></div>
     <div style="display: none" id="dataStatistics_count">0</div>
 </div>
