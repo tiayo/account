@@ -46,7 +46,6 @@
 
 @section('script')
 <script src="{{ asset('/js/echarts.js') }}"> </script>
-<script src="{{ asset('/js/ajax.js') }}"> </script>
 <script>
 var waterMarkText = '星科技';
 
@@ -83,36 +82,9 @@ genenal = {
     }],
     xAxis: [{
         type: 'value',
-        max: '',
         splitLine: {
             show: false
         }
-    }],
-    yAxis: [{
-        type: 'category',
-        data: [],
-        splitNumber: 5,
-        axisLabel: {
-            interval: 0,
-            rotate: 30
-        },
-        splitLine: {
-            show: false
-        }
-    }],
-    series: [{
-        type: 'bar',
-        stack: 'chart',
-        barWidth:1,
-        barCategoryGap:'1%',
-        z: 3,
-        label: {
-            normal: {
-                position: 'right',
-                show: false
-            }
-        },
-        data: []
     }]
 };
 
