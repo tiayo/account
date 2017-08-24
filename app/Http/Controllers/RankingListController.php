@@ -72,7 +72,7 @@ class RankingListController extends Controller
 
         foreach ($data as $value) {
 
-            $value['NAME'] = substr_replace($value['NAME'], '**', 0, strlen($value['NAME'])-3);
+            $value['NAME'] = substr_replace($value['NAME'], '**', 3, strlen($value['NAME']));
 
             $value['LOGIN'] = substr_replace($value['LOGIN'], '****', 0, strlen($value['LOGIN'])-2);
 
