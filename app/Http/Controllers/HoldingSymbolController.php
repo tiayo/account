@@ -13,20 +13,22 @@ class HoldingSymbolController extends Controller
     public function __construct(HoldingSymbol $symbol)
     {
         $this->symbol = $symbol;
-        $this->count = 4;
+        $this->count = 6;
     }
 
     public function view()
     {
         $symbols = $this->getSymbol();
 
+        $value = $this->getVolume();
+
         $result = [];$i = 1;
 
         foreach ($symbols as $symbol) {
 
-            $init_value_0 = $this->getVolume($symbol, 0);
+            $init_value_0 = $value[$this->keyword($symbol, 0)] ?? 0;
 
-            $init_value_1 = $this->getVolume($symbol, 1);
+            $init_value_1 = $value[$this->keyword($symbol, 1)] ?? 0;
 
             $result[$i]['symbol'] = $symbol['SYMBOL'];
  
@@ -47,19 +49,39 @@ class HoldingSymbolController extends Controller
     }
 
     /**
+     * 拼接关键字
+     *
+     * @param $symbol
+     * @param $cmd
+     * @return string
+     */
+    public function keyword($symbol, $cmd)
+    {
+        return $symbol['SYMBOL'].$cmd;
+    }
+
+    /**
      * 获取交易手数
      *
      * @param $symbol
      * @param $cmd
      * @return mixed
      */
-    public function getVolume($symbol, $cmd)
+    public function getVolume()
     {
-        return $this->symbol
-            ->select('VOLUME')
-            ->where('SYMBOL', $symbol['SYMBOL'])
-            ->where('CMD', $cmd)
-            ->first();
+        $result = [];
+
+        $symbols = $this->symbol
+            ->select('VOLUME', 'SYMBOL', 'CMD')
+            ->get()
+            ->toArray();
+
+        foreach ($symbols as $symbol) {
+            $keyword = $symbol['SYMBOL'].$symbol['CMD'];
+            $result[$keyword] = $symbol;
+        }
+
+        return $result;
     }
 
     /**
@@ -71,7 +93,7 @@ class HoldingSymbolController extends Controller
     {
         return $this->symbol
             ->select('SYMBOL')
-            ->where('SYMBOL', 'not like', '%bo')
+//            ->where('SYMBOL', 'not like', '%bo')
             ->groupBy('SYMBOL')
             ->orderBy(DB::raw("sum(volume)"), 'desc')
             ->get();
