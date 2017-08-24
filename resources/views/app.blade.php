@@ -89,7 +89,7 @@
 
     <!--footer section start-->
     <footer>
-        Copyright © 2015 - 2017 startce. All Rights Reserved
+        Copyright © 2015 - 2017 startce. All Rights Reserved <script src="https://s19.cnzz.com/z_stat.php?id=1263749482&web_id=1263749482" language="JavaScript"></script>
     </footer>
     <!--footer section end-->
 
