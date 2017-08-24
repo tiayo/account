@@ -241,3 +241,5 @@ function holding_cost_chart_ajax(route){
     });
 }
 
+
+

@@ -13,7 +13,7 @@ class HoldingSymbolController extends Controller
     public function __construct(HoldingSymbol $symbol)
     {
         $this->symbol = $symbol;
-        $this->count = 6;
+        $this->count = 4;
     }
 
     public function view()
