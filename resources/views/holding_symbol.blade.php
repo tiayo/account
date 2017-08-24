@@ -61,11 +61,12 @@
             var init_value = {!! $init_value !!};
 
             for (i=1; i<={{ $count }}; i++) {
+                console.log(init_value);
                 Morris.Donut({
                     element: 'graph-donut-' + i,
                     data: [
-                        {value: init_value[i][0].value, label: '空', formatted: init_value[i][0].value + '%' },
-                        {value: init_value[i][1].value, label: '多', formatted: init_value[i][1].value + '%' }
+                        {value: init_value[i][0].value, label: '多', formatted: init_value[i][0].value + '%' },
+                        {value: init_value[i][1].value, label: '空', formatted: init_value[i][1].value + '%' }
                     ],
                     backgroundColor: false,
                     labelColor: '#fff',
@@ -75,33 +76,6 @@
                     formatter: function (x, data) { return data.formatted; }
                 });
             }
-
-            $.ajax({
-                type: "post",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                url: route,
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                    Morris.Donut({
-                        element: 'graph-donut-' + num,
-                        data: [
-                            {value: data[0].value, label: '空', formatted: data[0].value + '%' },
-                            {value: data[1].value, label: '多', formatted: data[1].value + '%' }
-                        ],
-                        backgroundColor: false,
-                        labelColor: '#fff',
-                        colors: [
-                            '#4acacb','#6a8bc0'
-                        ],
-                        formatter: function (x, data) { return data.formatted; }
-                    });
-
-                    $('#holding_symbol_' + num).find('#btnGroupDrop1_span').html(data.symbol);
-                }
-            });
         });
 
 

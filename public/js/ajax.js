@@ -110,7 +110,7 @@ function index_trades(route) {
                     "<td>"+data[i].VOLUME/100+"</td>"+
                     "<td>"+data[i].CMD+"</td>"+
                     "<td>"+data[i].OPEN_TIME+"</td>"+
-                    "<td>"+parseFloat(data[i].OPEN_PRICE).toFixed(2)+"</td>"+
+                    "<td>"+parseFloat(data[i].OPEN_PRICE)+"</td>"+
                     "</tr>";
             }
 

@@ -16,6 +16,11 @@ class HoldingSymbolController extends Controller
         $this->count = 6;
     }
 
+    /**
+     * 0是多，1是空
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function view()
     {
         $symbols = $this->getSymbol();
@@ -35,6 +40,7 @@ class HoldingSymbolController extends Controller
             $sum = $init_value_0['VOLUME'] + $init_value_1['VOLUME'] ? : 1;
 
             $result[$i][0]['value'] = number_format($init_value_0['VOLUME'] / $sum * 100, 2);
+
             $result[$i][1]['value'] = number_format($init_value_1['VOLUME'] / $sum * 100, 2);
 
             $i++;
