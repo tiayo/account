@@ -20,6 +20,8 @@ class HoldingCostController extends Controller
 
     public function view()
     {
+        $symbols = $this->getSymbol();
+
         $type[0] = '多头持仓成本分布图';
         $type[1] = '空头持仓成本分布图';
         $type[2] = '多头止损位分布图';
@@ -29,13 +31,14 @@ class HoldingCostController extends Controller
 
         return view('holding_cost', [
             'type' => $type,
+            'symbols' => $symbols,
         ]);
     }
 
     /**
      * 获取所有分组
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed
      */
     public function getSymbol()
     {
@@ -45,7 +48,7 @@ class HoldingCostController extends Controller
             ->orderBy('count', 'desc')
             ->get();
 
-        return response()->json($symbols);
+        return $symbols;
     }
 
     /**

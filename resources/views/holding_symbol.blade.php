@@ -81,6 +81,7 @@
 
         function symbol_click(num, symbol) {
             holdingsymbol_ajax(num, "{{ route('holdingsymbol_value', [ 'symbol' => null]) }}" + "/" + symbol);
+            $('#holding_symbol_'+num).find(".panel-heading").html("品种组："+symbol);
         }
 
     </script>

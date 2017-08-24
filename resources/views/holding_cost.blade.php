@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', '货币对多空持仓成本、止损、止盈分布图')
+@section('title', '多空持仓成本、止损、止盈分布图')
 
 @section('style')
 
@@ -9,11 +9,13 @@
 @section('content')
         <!-- /btn-group -->
         <div class="btn-group" style="margin:4em 0 0 15px;">
-            <button data-toggle="dropdown" type="button" class="btn btn-info btn-sm dropdown-toggle">
-            选择产品组 <span class="caret"></span>
+            <button data-toggle="dropdown" type="button" class="btn btn-info btn-sm dropdown-toggle" id="btnGroupDrop1">
+            <b>{{ $symbols[0]['SYMBOL'] }}</b> <span class="caret"></span>
             </button>
-            <ul role="menu" class="dropdown-menu" id="dropMenuUlLi">
-
+            <ul aria-labelledby="btnGroupDrop1" role="menu" class="dropdown-menu" id="dropMenuUlLi">
+                @foreach($symbols as $symbol)
+                    <li><a onclick='active_symbol("{{ $symbol['SYMBOL'] }}")'>{{ $symbol['SYMBOL'] }}</a></li>
+                @endforeach
             </ul>
         </div>
         <!-- /btn-group -->
@@ -114,26 +116,18 @@ genenal = {
     }]
 };
 
-/*下拉菜单*/
-$.ajax({
-    url:"/holdingcost_symbol",
-    type: 'GET',
-    dataType:'json',
-    success:function(result) {
-        $.each(result,function(k,v){
-            $("#dropMenuUlLi").append("<li><a onclick='active_symbol(\""+v.SYMBOL+"\")'>"+ v.SYMBOL +"</a></li>")
-        });
-
-        //执行显示图表
-        holding_cost_chart_ajax('{{ route('holdingcost_value', ['symbol' => '']) }}' + '/' + result[0].SYMBOL);
-    }
+$(document).ready(function () {
+    //执行显示图表
+    holding_cost_chart_ajax('{{ route('holdingcost_value', ['symbol' => $symbols[0]['SYMBOL']]) }}');
 });
 
-function active_symbol($group)
+function active_symbol(group)
 {
     $('canvas').html('');
 
-    holding_cost_chart_ajax('{{ route('holdingcost_value', ['symbol' => '']) }}' + '/' + $group);
+    holding_cost_chart_ajax('{{ route('holdingcost_value', ['symbol' => '']) }}' + '/' + group);
+
+    $('#btnGroupDrop1').find('b').html(group);
 }
 </script>
 @endsection
