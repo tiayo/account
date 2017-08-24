@@ -80,6 +80,18 @@ class IndexController extends Controller
             ->get()
             ->toArray();
 
-        return response()->json($trades);
+        $trades_handle = [];
+
+        //屏蔽关键字段
+        foreach ($trades as $trade) {
+
+            $trade['TICKET'] = substr_replace($trade['TICKET'], '****', 0, strlen($trade['TICKET'])-2);
+
+            $trade['LOGIN'] = substr_replace($trade['LOGIN'], '****', 0, strlen($trade['LOGIN'])-2);
+
+            $trades_handle[] = $trade;
+        }
+
+        return response()->json($trades_handle);
     }
 }

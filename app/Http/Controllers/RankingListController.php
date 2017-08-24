@@ -38,7 +38,7 @@ class RankingListController extends Controller
             ->get()
             ->toArray();
 
-        return ['info' => $info, 'info_reverse' => $info_reverse];
+        return ['info' => $this->handle($info), 'info_reverse' => $this->handle($info_reverse)];
     }
 
     public function getFollow()
@@ -57,6 +57,28 @@ class RankingListController extends Controller
             ->get()
             ->toArray();
 
-        return ['info' => $info, 'info_reverse' => $info_reverse];
+        return ['info' => $this->handle($info), 'info_reverse' => $this->handle($info_reverse)];
+    }
+
+    /**
+     * 屏蔽关键字
+     *
+     * @param $data
+     * @return array
+     */
+    public function handle($data)
+    {
+        $result = [];
+
+        foreach ($data as $value) {
+
+            $value['NAME'] = substr_replace($value['NAME'], '**', 0, strlen($value['NAME'])-3);
+
+            $value['LOGIN'] = substr_replace($value['LOGIN'], '****', 0, strlen($value['LOGIN'])-2);
+
+            $result[] = $value;
+        }
+
+        return $result;
     }
 }
