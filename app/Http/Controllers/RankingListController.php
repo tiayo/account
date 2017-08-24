@@ -74,6 +74,8 @@ class RankingListController extends Controller
 
             $value['NAME'] =  mb_substr($value['NAME'], 0, 1, 'utf8').'***';
 
+            $value['LOGIN_S'] = $value['LOGIN'];
+
             $value['LOGIN'] = substr_replace($value['LOGIN'], '****', 0, strlen($value['LOGIN'])-2);
 
             $result[] = $value;

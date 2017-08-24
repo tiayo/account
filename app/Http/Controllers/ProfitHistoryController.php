@@ -16,13 +16,17 @@ class ProfitHistoryController extends Controller
 
     public function view($login)
     {
+        $login = decrypt($login);
+
         return view('profit_history', [
-            'login' => $login,
+            'login' => substr_replace($login, '****', 0, strlen($login)-2),
         ]);
     }
 
     public function get($login)
     {
+        $login = decrypt($login);
+
         $i = 0; $result = []; $y=[];
 
         $info = $this->profit_history
