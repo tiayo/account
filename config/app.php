@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //bebug
-//        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
