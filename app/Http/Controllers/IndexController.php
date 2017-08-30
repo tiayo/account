@@ -73,8 +73,8 @@ class IndexController extends Controller
     {
         $trades = $this->trade
             ->select('TICKET', 'SYMBOL', 'VOLUME', 'OPEN_TIME', 'CMD', 'LOGIN', 'OPEN_PRICE')
-            ->where('CMD', 0)
-            ->orwhere('CMD', 1)
+            ->whereIn('CMD', [0,1])
+            ->where('SYMBOL', 'not like', '%bo%')
             ->orderBy('OPEN_TIME', 'desc')
             ->limit(10)
             ->get()
