@@ -1190,7 +1190,7 @@ footer.sticky-footer {
 }
 
 .state-overview .symbol {
-    width: 35%;
+    width: 30%;
 }
 
 .state-overview .symbol i {
@@ -1198,7 +1198,7 @@ footer.sticky-footer {
 }
 
 .state-overview .state-value {
-    width: 62%;
+    width: 70%;
 }
 
 .state-overview .state-value .value {
