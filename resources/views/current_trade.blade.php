@@ -49,9 +49,9 @@
                                         </td>
                                         <td>
                                             @if($trade['type'] == 0)
-                                                {{ $trade['OPEN_PRICE'] }}
+                                                开仓价：{{ $trade['OPEN_PRICE'] }}
                                             @else
-                                                {{ $trade['CLOSE_PRICE'] }}
+                                                平仓价：{{ $trade['CLOSE_PRICE'] }}
                                             @endif
                                         </td>
                                     </tr>
