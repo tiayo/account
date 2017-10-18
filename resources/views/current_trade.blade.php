@@ -31,15 +31,15 @@
                                 @foreach($trades as $trade)
                                     <tr>
                                         <td>{{ $trade['id'] }}</td>
-                                        <td>{{ $trade['symbol'] }}</td>
+                                        <td>{{ $trade['SYMBOL'] }}</td>
                                         <td>
-                                            @if($trade['cmd'] == 0)
+                                            @if($trade['CMD'] == 0)
                                                 多投
                                                 @else
                                                 空投
                                             @endif
                                         </td>
-                                        <td>{{ number_format($trade['volume'] / 100, 2) }}</td>
+                                        <td>{{ number_format($trade['VOLUME'] / 100, 2) }}</td>
                                         <td>
                                             @if($trade['type'] == 0)
                                                 开仓
@@ -49,9 +49,9 @@
                                         </td>
                                         <td>
                                             @if($trade['type'] == 0)
-                                                {{ $trade['open_price'] }}
+                                                {{ $trade['OPEN_PRICE'] }}
                                             @else
-                                                {{ $trade['close_price'] }}
+                                                {{ $trade['CLOSE_PRICE'] }}
                                             @endif
                                         </td>
                                     </tr>
