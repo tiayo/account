@@ -17,3 +17,5 @@ Route::get('/ranking_list', 'RankingListController@view')->name('ranking_list');
 
 Route::get('/profit_history/{login}', 'ProfitHistoryController@view')->name('profit_history');
 Route::post('/profit_history/{login}', 'ProfitHistoryController@get');
+
+Route::get('/current_trade', 'CurrentTradeContrller@index')->name('current_trade');
