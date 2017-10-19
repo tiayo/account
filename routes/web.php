@@ -19,3 +19,4 @@ Route::get('/profit_history/{login}', 'ProfitHistoryController@view')->name('pro
 Route::post('/profit_history/{login}', 'ProfitHistoryController@get');
 
 Route::get('/current_trade', 'CurrentTradeContrller@index')->name('current_trade');
+Route::get('/ws_secret', 'Controller@wsSecret')->name('ws_secret');
