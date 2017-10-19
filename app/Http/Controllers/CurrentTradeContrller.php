@@ -28,7 +28,7 @@ class CurrentTradeContrller extends Controller
      */
     public function get(Request $request)
     {
-        $volume = $request->get('volume') ?? 0;
+        $volume = $request->get('volume') * 100 ?? 0;
 
         $symbol = $request->get('symbol') ?? null;
 
