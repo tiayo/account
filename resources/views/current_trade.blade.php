@@ -15,16 +15,25 @@
                             <a href="javascript:;" class="fa fa-times"></a>
                          </span>
                     </header>
-
                     <div class="panel-body">
-                        <form class="form-inline"role="form">
+                        <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <input type="text" id="subscribe_symbol" class="form-control" placeholder="请输入正确的品种组">
+                                <label for="subscribe_symbol" class="col-lg-2 col-sm-2 control-label">品种组：</label>
+                                <div class="col-lg-3">
+                                    <input type="text" id="subscribe_symbol" class="form-control" value="USDJPY">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="number" id="subscribe_volume" class="form-control" placeholder="输入手数起点">
+                                <label for="subscribe_volume" class="col-lg-2 col-sm-2 control-label">手数大于：</label>
+                                <div class="col-lg-3">
+                                    <input type="number" id="subscribe_volume" class="form-control" value="0">
+                                </div>
                             </div>
-                            <button type="button" id="subscribe_from" class="btn btn-primary">确认筛选</button>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="button" id="subscribe_from" class="btn btn-primary">确认筛选</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
@@ -32,16 +41,17 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
+                                <th>交易时间</th>
                                 <th>交易品种</th>
                                 <th>开平</th>
                                 <th>手数</th>
                                 <th>价格</th>
-                                <th>交易时间</th>
                             </tr>
                             </thead>
                             <tbody id="tbody_1">
                                 @foreach($trades as $trade)
                                     <tr style="color: @if ($trade['type'] == $trade['CMD']) red @else green @endif">
+                                        <td>{{ $trade['update_time'] }}</td>
                                         <td>{{ $trade['SYMBOL'] }}</td>
                                         <td>
                                             @php
@@ -68,7 +78,6 @@
                                                 {{ $trade['CLOSE_PRICE'] }}
                                             @endif
                                         </td>
-                                        <td>{{ $trade['update_time'] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -118,9 +127,10 @@
 
                     if (data.msg_type === 1003) {
                         if (data.result_code === 0) {
-                            alert('筛选订阅成功！');
+                            //筛选数据初始化（同步）
+                            screen_init();
                         } else {
-                            alert('失败:' + data.result_msg);
+                            alert('筛选订阅失败:' + data.result_msg);
                         }
                     }
 
@@ -137,6 +147,30 @@
             } catch (ex) {
                 console.log(ex.message);
             }
+        }
+
+        //筛选初始化
+        function screen_init() {
+            $.ajax({
+                type: "get",
+                url: "{{ route('current_trade_get') }}?symbol=" + $('#subscribe_symbol').val() + '&volume=' + $('#subscribe_volume').val(),
+                dataType: "json",
+                async: false,
+                success: function (screen_init_data) {
+                    //全部清除
+                    $('#tbody_1').children("tr").each(function () {
+                        $(this).remove();
+                    });
+
+                    //重新逐条插入
+                    $.each(screen_init_data, function(key, value) {
+                        insert(value);
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
         }
 
         //发送信息筛选
@@ -157,7 +191,9 @@
             } else {
                 subscribe_volume = subscribe_volume * 100;
             }
-console.log('{"msg_type":1002, "symbol_count":'+symbol_count+',"symbol":'+subscribe_symbol+',"volume":'+subscribe_volume+'}');
+
+            console.log('{"msg_type":1002, "symbol_count":'+symbol_count+',"symbol":'+subscribe_symbol+',"volume":'+subscribe_volume+'}');
+
             ws.send('{"msg_type":1002, "symbol_count":'+symbol_count+',"symbol":'+subscribe_symbol+',"volume":'+subscribe_volume+'}');
         }
 
@@ -202,6 +238,7 @@ console.log('{"msg_type":1002, "symbol_count":'+symbol_count+',"symbol":'+subscr
             }
 
             var html  = '<tr style="color: '+ color +'">' +
+                '<td>'+data.update_time+'</td>'+
                 '<td>'+data.symbol+'</td>';
 
             if (data.type === 0) {
@@ -224,8 +261,7 @@ console.log('{"msg_type":1002, "symbol_count":'+symbol_count+',"symbol":'+subscr
                 html += '<td>'+data.close_price+'</td>';
             }
 
-            html += '<td>'+data.update_time+'</td>'+
-                '</tr>';
+            html += '</tr>';
 
             return html;
         }

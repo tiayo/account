@@ -19,4 +19,47 @@ class CurrentTradeContrller extends Controller
             'trades' => $trades,
         ]);
     }
+
+    /**
+     * 根据条件获取
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function get(Request $request)
+    {
+        $volume = $request->get('volume') ?? 0;
+
+        $symbol = $request->get('symbol') ?? null;
+
+        if (!empty($symbol)) {
+            $where = [
+                ['volume', '>=', $volume],
+                ['symbol', $symbol]
+            ];
+        } else {
+            $where = [
+                ['volume', '>=', $volume],
+            ];
+        }
+
+        $trades = CurTrade::limit(15)
+            ->where($where)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        foreach ($trades as $trade) {
+            $json[] = [
+                'symbol' => $trade['SYMBOL'],
+                'update_time' => $trade['update_time'],
+                'type' => $trade['type'],
+                'cmd' => $trade['CMD'],
+                'open_price' => $trade['OPEN_PRICE'],
+                'close_price' => $trade['CLOSE_PRICE'],
+                'volume' => $trade['VOLUME']
+            ];
+        }
+
+        return response()->json($json);
+    }
 }
