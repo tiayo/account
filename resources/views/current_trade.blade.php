@@ -236,7 +236,7 @@
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    console.log(errorThrown);
                 }
             });
         }
