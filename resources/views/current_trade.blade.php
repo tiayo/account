@@ -229,7 +229,7 @@
                 success: function (account_data) {
                     var i = b = 0;
 
-                    for (i=0; i<1; i++) {
+                    for (i=0; i<=1; i++) {
                         for(b=1; b<=3; b++) {
                             $('#account_' + i + '_' + b).css("width", account_data[i][b] + "%");
                         }
