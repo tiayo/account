@@ -60,6 +60,6 @@ class CurrentTradeContrller extends Controller
             ];
         }
 
-        return response()->json($json);
+        return response()->json(array_reverse($json));
     }
 }
