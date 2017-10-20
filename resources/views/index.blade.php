@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', '全局监控')
+@section('title', '星科技大数据监控平台')
 
 @section('style')
     <style>
@@ -104,7 +104,7 @@
             <!--statistics end-->
         <div class="row">
             {{--实时订单开始--}}
-            @include('trade')
+            {{--@include('trade')--}}
             {{--实时订单结束--}}
         </div>
     <!--body wrapper end-->

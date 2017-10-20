@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\CurTrade;
+use Carbon\Carbon;
+use function foo\func;
 use Illuminate\Http\Request;
 
 class CurrentTradeContrller extends Controller
@@ -61,5 +63,102 @@ class CurrentTradeContrller extends Controller
         }
 
         return response()->json(array_reverse($json));
+    }
+
+    /**
+     * 统计单子分布
+     *
+     * @param Request $reques
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function account(Request $reques)
+    {
+        $result_1 = $this->accountHandle(1, $reques);
+        $result_0 = $this->accountHandle(0, $reques);
+
+        return response()->json([
+            0 => $result_0,
+            1 => $result_1,
+        ]);
+    }
+
+    /**
+     * 计算和处理
+     *
+     * @param $type
+     * @param Request $reques
+     * @return array
+     */
+    public function accountHandle($type, Request $reques)
+    {
+        $data = $reques->all();
+
+        $min = !empty($data['account_min'] * 100) ? $data['account_min'] * 100 : 100;
+        $max = !empty($data['account_max'] * 100) ? $data['account_max'] * 100 : 1000;
+        $before = !empty($reques->get('account_before')) ? Carbon::now()->addHour(0 - $reques->get('account_before')) : 0;
+
+        //小单
+        $where_1[] = ['VOLUME', '<', $min];
+        !empty($before) ? $where_1[] = ['update_time', '>', $before] : true;
+        $count_1 = $this->count($where_1, $type);
+
+        //中单
+        $where_2[] = ['VOLUME', '>=', $min];
+        $where_2[] = ['VOLUME', '<=', $max];
+        !empty($before) ? $where_2[] = ['update_time', '>', $before] : true;
+        $count_2 = $this->count($where_2, $type);
+
+        //大单
+        $where_3[] = ['VOLUME', '>', $max];
+        !empty($before) ? $where_3[] = ['update_time', '>', $before] : true;
+        $count_3 = $this->count($where_3, $type);
+
+        //总数
+        $count = $count_1 + $count_2 + $count_3 != 0 ?
+            $count_1 + $count_2 + $count_3 : 1;
+
+        return [
+            1 => (int) $count_1 / $count * 100,
+            2 => (int) $count_2 / $count * 100,
+            3 => (int) $count_3 / $count * 100,
+        ];
+    }
+
+    /**
+     * 根据条件统计
+     *
+     * @param $where
+     * @param $type
+     * @return int
+     */
+    public function count($where, $type)
+    {
+        //多头
+        if ($type == 0) {
+            return CurTrade::where($where)
+                ->where(function ($query) {
+                    $query->where(function ($query_2) {
+                        $query_2->where('type', 1)
+                            ->where('CMD', 1);
+                    })->orwhere(function ($query_3) {
+                        $query_3->where('type', 0)
+                            ->where('CMD', 0);
+                    });
+                })
+                ->count();
+        }
+
+        //空头
+        return CurTrade::where($where)
+            ->where(function ($query) {
+                $query->where(function ($query_2) {
+                    $query_2->where('type', 1)
+                        ->where('CMD', 0);
+                })->orwhere(function ($query_3) {
+                    $query_3->where('type', 0)
+                        ->where('CMD', 1);
+                });
+            })
+            ->count();
     }
 }

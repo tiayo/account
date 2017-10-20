@@ -2,11 +2,121 @@
 
 @section('title', '盘口')
 
+@section('style')
+    <link href="{{ asset('/static/adminex/js/c3-chart/c3.css') }}" rel="stylesheet"/>
+@endsection
+
 @section('content')
     <!--body wrapper start-->
     <div class="wrapper" style="margin-top: 2em;">
         <div class="row">
             <div class="col-sm-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        盘口统计-多头
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <label class="control-label" style="float: left">大单</label>
+                            <div class="progress progress-striped active progress-sm col-md-9">
+                                <div id="account_0_3" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-success"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="control-label" style="float: left">中单</label>
+                            <div class="progress progress-striped active progress-sm col-md-9">
+                                <div id="account_0_2" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-info"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="control-label" style="float: left">小单</label>
+                            <div class="progress progress-striped active progress-sm col-md-9">
+                                <div id="account_0_1" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-danger"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <header class="panel-heading">
+                        盘口统计-空头
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <label class="control-label" style="float: left">大单</label>
+                            <div class="progress progress-striped active progress-sm col-md-9">
+                                <div id="account_1_3" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-success"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="control-label" style="float: left">中单</label>
+                            <div class="progress progress-striped active progress-sm col-md-9">
+                                <div id="account_1_2" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-info"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="control-label" style="float: left">小单</label>
+                            <div class="progress progress-striped active progress-sm col-md-9">
+                                <div id="account_1_1" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-danger"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <header class="panel-heading">
+                        自定义盘口统计
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <form class="form-inline" role="form" id="account_form">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="text" name="account_min" class="form-control"
+                                           placeholder="输入小单小于手数，如：1">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="number" name="account_max" class="form-control"
+                                           placeholder="输入大单大于手数，如：10">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="number" name="account_before" class="form-control"
+                                           placeholder="几小时前，如：1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1em">
+                                <div class="col-md-3">
+                                    <button type="button" id="account_submit" class="btn btn-primary">确认调整</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-6">
                 <section class="panel">
                     <header class="panel-heading no-border">
                         盘口列表
@@ -16,21 +126,21 @@
                          </span>
                     </header>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-inline" role="form">
                             <div class="form-group">
-                                <label for="subscribe_symbol" class="col-lg-2 col-sm-2 control-label">品种组：</label>
-                                <div class="col-lg-3">
-                                    <input type="text" id="subscribe_symbol" class="form-control" value="USDJPY">
+                                <div class="col-md-3">
+                                    <input type="text" id="subscribe_symbol" class="form-control"
+                                           placeholder="输入交易品种，如：USDJPY">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="subscribe_volume" class="col-lg-2 col-sm-2 control-label">手数大于：</label>
-                                <div class="col-lg-3">
-                                    <input type="number" id="subscribe_volume" class="form-control" value="0">
+                                <div class="col-md-3">
+                                    <input type="number" id="subscribe_volume" class="form-control"
+                                           placeholder="手数大于值，如：0">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
+                                <div class="col-md-10">
                                     <button type="button" id="subscribe_from" class="btn btn-primary">确认筛选</button>
                                 </div>
                             </div>
@@ -87,6 +197,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" value="0" id="jishuqi">
     <!--body wrapper end-->
 @endsection
 
@@ -96,10 +207,39 @@
         $(document).ready(function () {
             ToggleConnectionClicked();
 
+            setTimeout("account()", 10);
+            setInterval("account()", 10000);
+
+            $('#account_submit').click(function () {
+                setTimeout("account()", 10);
+            });
+
             $('#subscribe_from').click(function () {
                 send_subscribe();
             });
         });
+
+        //加载盘口统计
+        function account() {
+            $.ajax({
+                type: "get",
+                url: "{{ route('current_trade_account') }}",
+                data: $('#account_form').serialize(),
+                dataType: "json",
+                success: function (account_data) {
+                    var i = b = 0;
+
+                    for (i=0; i<1; i++) {
+                        for(b=1; b<=3; b++) {
+                            $('#account_' + i + '_' + b).css("width", account_data[i][b] + "%");
+                        }
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
 
         var ws;
 
@@ -110,7 +250,12 @@
                 ws = new WebSocket("ws://192.168.1.253:9898");
 
                 //连接成功
-                ws.onopen = function(event){console.log("已经与服务器建立了连接\r\n当前连接状态："+this.readyState);};
+                ws.onopen = function(event){
+                    //计数器清0
+                    $('#jishuqi').val(0);
+
+                    console.log("已经与服务器建立了连接\r\n当前连接状态："+this.readyState);
+                };
 
                 //接收数据
                 ws.onmessage = function(event){
@@ -140,7 +285,18 @@
                 };
 
                 //断开连接
-                ws.onclose = function(event){console.log("已经与服务器断开连接\r\n当前连接状态："+this.readyState);};
+                ws.onclose = function(event){
+                    console.log("已经与服务器断开连接\r\n当前连接状态："+this.readyState+"\r\n尝试重连中...");
+                    var jishuqi = parseInt($('#jishuqi').val());
+
+                    if (jishuqi < 20) {
+                        $('#jishuqi').val(jishuqi + 1);
+                        //重连
+                        return setTimeout("ToggleConnectionClicked()", 3000);
+                    }
+
+                    console.log("重连超过"+jishuqi+"次，已断开！");
+                };
 
                 //异常
                 ws.onerror = function(event){console.log("WebSocket异常！");};
@@ -207,7 +363,7 @@
                     ws.send(JSON.stringify(data));
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                	  alert(errorThrown);
+                	  console.log(errorThrown);
                 }
             });
         }
