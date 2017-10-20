@@ -363,7 +363,9 @@
                     ws.send(JSON.stringify(data));
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                	  console.log(errorThrown);
+                    if (XMLHttpRequest.status === 403) {
+                        setTimeout("location.reload();", 3000);
+                    }
                 }
             });
         }
