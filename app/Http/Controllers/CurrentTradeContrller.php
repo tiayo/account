@@ -145,7 +145,7 @@ class CurrentTradeContrller extends Controller
                             ->where('CMD', 0);
                     });
                 })
-                ->count();
+                ->sum('VOLUME');
         }
 
         //空头
@@ -159,6 +159,6 @@ class CurrentTradeContrller extends Controller
                         ->where('CMD', 1);
                 });
             })
-            ->count();
+            ->sum('VOLUME');
     }
 }

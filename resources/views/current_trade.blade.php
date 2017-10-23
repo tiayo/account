@@ -247,7 +247,7 @@
         function ToggleConnectionClicked() {
             try {
                 //连接服务器
-                ws = new WebSocket("ws://192.168.1.253:9898");
+                ws = new WebSocket("ws://47.91.199.23:9988");
 
                 //连接成功
                 ws.onopen = function(event){
