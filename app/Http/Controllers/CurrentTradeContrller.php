@@ -30,6 +30,8 @@ class CurrentTradeContrller extends Controller
      */
     public function get(Request $request)
     {
+        $json = [];
+
         $volume = $request->get('volume') * 100 ?? 0;
 
         $symbol = $request->get('symbol') ?? null;
@@ -95,22 +97,26 @@ class CurrentTradeContrller extends Controller
 
         $min = !empty($data['account_min'] * 100) ? $data['account_min'] * 100 : 100;
         $max = !empty($data['account_max'] * 100) ? $data['account_max'] * 100 : 1000;
-        $before = !empty($reques->get('account_before')) ? Carbon::now()->addHour(0 - $reques->get('account_before')) : 0;
+        $before = !empty($data['account_before']) ? Carbon::now()->addHour(0 - $reques->get('account_before')) : 0;
+        $symbol = !empty($data['subscribe_symbol']) ? $data['subscribe_symbol'] : 0;
 
         //小单
         $where_1[] = ['VOLUME', '<', $min];
         !empty($before) ? $where_1[] = ['update_time', '>', $before] : true;
+        !empty($symbol) ? $where_1[] = ['SYMBOL', $symbol] : true;
         $count_1 = $this->count($where_1, $type);
 
         //中单
         $where_2[] = ['VOLUME', '>=', $min];
         $where_2[] = ['VOLUME', '<=', $max];
         !empty($before) ? $where_2[] = ['update_time', '>', $before] : true;
+        !empty($symbol) ? $where_2[] = ['SYMBOL', $symbol] : true;
         $count_2 = $this->count($where_2, $type);
 
         //大单
         $where_3[] = ['VOLUME', '>', $max];
         !empty($before) ? $where_3[] = ['update_time', '>', $before] : true;
+        !empty($symbol) ? $where_3[] = ['SYMBOL', $symbol] : true;
         $count_3 = $this->count($where_3, $type);
 
         //总数

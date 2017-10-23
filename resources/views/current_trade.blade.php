@@ -126,7 +126,7 @@
                          </span>
                     </header>
                     <div class="panel-body">
-                        <form class="form-inline" role="form">
+                        <form class="form-inline" role="form" id="list_form">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <input type="text" id="subscribe_symbol" class="form-control"
@@ -216,6 +216,7 @@
 
             $('#subscribe_from').click(function () {
                 send_subscribe();
+                account();
             });
         });
 
@@ -224,7 +225,12 @@
             $.ajax({
                 type: "get",
                 url: "{{ route('current_trade_account') }}",
-                data: $('#account_form').serialize(),
+                data: {
+                    account_min:$('[name=account_min]').val(),
+                    account_max:$('[name=account_max]').val(),
+                    account_before:$('[name=account_before]').val(),
+                    subscribe_symbol:$('#subscribe_symbol').val()
+                },
                 dataType: "json",
                 success: function (account_data) {
                     var i = b = 0;
