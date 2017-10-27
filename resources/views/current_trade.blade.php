@@ -85,28 +85,23 @@
                     </header>
                     <div class="panel-body">
                         <form class="form-inline" role="form" id="account_form">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <input type="text" name="account_min" class="form-control"
-                                           placeholder="输入小单小于手数，如：1">
-                                </div>
+                            <div class="form-group" style="margin-right: 1em">
+                                <lable>小单小于:</lable>
+                                <input type="text" name="account_min" class="form-control" style="width: 100px;">
+                            </div>
+
+                            <div class="form-group" style="margin-right: 1em">
+                                <lable>大单大于:</lable>
+                                <input type="number" name="account_max" class="form-control" style="width: 100px;">
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <input type="number" name="account_max" class="form-control"
-                                           placeholder="输入大单大于手数，如：10">
-                                </div>
+                                <lable>时间近:</lable>
+                                <input type="number" name="account_before" class="form-control" style="width: 100px;">
+                                <lable>小时</lable>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <input type="number" name="account_before" class="form-control"
-                                           placeholder="几小时前，如：1">
-                                </div>
-                            </div>
-
-                            <div class="form-group" style="margin-top: 1em">
+                            <div class="form-group" style="margin-top: 1em; width: 100%">
                                 <div class="col-md-3">
                                     <button type="button" id="account_submit" class="btn btn-primary">确认调整</button>
                                 </div>
@@ -128,16 +123,12 @@
                     <div class="panel-body">
                         <form class="form-inline" role="form" id="list_form">
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <input type="text" id="subscribe_symbol" class="form-control"
-                                           placeholder="输入交易品种，如：USDJPY">
-                                </div>
+                                <label>交易品种：</label>
+                                <input type="text" id="subscribe_symbol" class="form-control">
                             </div>
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <input type="number" id="subscribe_volume" class="form-control"
-                                           placeholder="手数大于值，如：0">
-                                </div>
+                                <label>手数大于：</label>
+                                <input type="number" id="subscribe_volume" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10">

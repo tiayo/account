@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\CurTrade;
 use Carbon\Carbon;
-use function foo\func;
 use Illuminate\Http\Request;
 
 class CurrentTradeContrller extends Controller
@@ -95,8 +94,8 @@ class CurrentTradeContrller extends Controller
     {
         $data = $reques->all();
 
-        $min = !empty($data['account_min'] * 100) ? $data['account_min'] * 100 : 100;
-        $max = !empty($data['account_max'] * 100) ? $data['account_max'] * 100 : 1000;
+        $min = !empty($data['account_min'] * 100) ? $data['account_min'] * 100 : 500;
+        $max = !empty($data['account_max'] * 100) ? $data['account_max'] * 100 : 2000;
         $before = !empty($data['account_before']) ? Carbon::now()->addHour(0 - $reques->get('account_before')) : 0;
         $symbol = !empty($data['subscribe_symbol']) ? $data['subscribe_symbol'] : 0;
 

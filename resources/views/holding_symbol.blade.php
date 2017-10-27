@@ -34,8 +34,8 @@
                                     </div>
                                     <div class="col-md-5 col-sm-5 col-xs-5">
                                         <ul class="bar-legend">
-                                            <li><span class="blue"></span>多</li>
-                                            <li><span class="green"></span>空</li>
+                                            <li><span class="blue"></span>空</li>
+                                            <li><span class="green"></span>多</li>
                                         </ul>
                                     </div>
                                 </div>
